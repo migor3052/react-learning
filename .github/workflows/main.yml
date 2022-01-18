@@ -22,4 +22,4 @@ jobs:
           args: ''
       - name: Dump GitHub context
         id: github_context_step
-        run: echo '${{ format('Hello {0} {1} {2}', github.event.pull_request.user, 'the', 'Octocat')}}'
+        run: echo '${{ format('Hello {0} {1} {2}', toJSON(github.event.pull_request.user), 'the', 'Octocat')}}'
