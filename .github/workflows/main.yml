@@ -21,4 +21,4 @@ jobs:
         with:
           args: ''
       - name: Dump job context
-        run: echo '${{ toJSON(job) }}'
+        run: echo '${{ toJSON(github.event) }}'
