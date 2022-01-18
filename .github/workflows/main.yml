@@ -3,7 +3,7 @@ name: Discord notification on PR request and
 on:
   # Triggers the workflow on PR request and submitted review
   pull_request:
-    types: [review_requested, opened]
+    types: [review_requested, opened, closed]
   pull_request_review:
     types: [submitted]
   
