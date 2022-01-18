@@ -22,4 +22,4 @@ jobs:
           args: ''
       - name: Dump GitHub context
         id: github_context_step
-        run: echo '${{ format('Hello {0} {1} {2}', toJSON(github.event.pull_request.user), 'tee', 'Octocat')}}'
+        run: echo '${{ format('{0} has requested a review from {1} for the PR{2} {3}', toJSON(github.event.pull_request.user.login), toJSON(github.event.requested_reviewer.login),':', toJSON(github.event.pull_request.title))}}'
