@@ -18,6 +18,6 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           USER: ${{ EVENT_PAYLOAD.pull_request.user.login }}
-          DISCORD_EMBEDS: '[{"title":"PR Review Requested!","description":"${{ env.USER }} has requested a"}]'
+          DISCORD_EMBEDS: '[{"title":"PR Review Requested!","description":"{{${{ toJSON(job) }} }} has requested a"}]'
         with:
           args: ''
