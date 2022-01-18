@@ -17,6 +17,6 @@ jobs:
         uses: Ilshidur/action-discord@master
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title":"PR Review Requested!", "url":${{ toJSON(github.event.pull_request.html_url) }},"description": "${{ toJSON(github.event.pull_request.user.login)}} ${{toJSON(github.event.requested_reviewer.login)}}"  }]'
+          DISCORD_EMBEDS: '[{"title":"PR Review Requested!", "url":${{ toJSON(github.event.pull_request.html_url) }},"description": "${{ github.event.pull_request.user.login}} ${{github.event.requested_reviewer.login}}"  }]'
         with:
           args: ''
