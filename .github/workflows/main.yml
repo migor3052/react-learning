@@ -20,5 +20,5 @@ jobs:
           DISCORD_EMBEDS: '[{"title":"PR Review Requested!","description":" has requested a"}]'
         with:
           args: ''
-      - name: Dump job context
-        run: echo '${{ toJSON(github.event) }}'
+      - name: print test
+        run: echo '${{ toJSON(github) }}'
