@@ -23,18 +23,18 @@ jobs:
           args: ''
       - name: Review submitted - Approved 
         uses: Ilshidur/action-discord@master
-        if: github.event.action == 'submitted' && github.event.review.status == 'approved'
+        if: github.event.action == 'submitted' && github.event.review.state == 'approved'
         env: 
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title":"PR Review Submitted!", "color": 65280, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: ${{github.event.pull_request.title}}"  }]'
+          DISCORD_EMBEDS: '[{"title":"PR Review Submitted - ${{ github.event.review.state}}", "color": 65280, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: ${{github.event.pull_request.title}}"  }]'
         with:
           args: ''
       - name: Review submitted - Other
         uses: Ilshidur/action-discord@master
-        if: github.event.action == 'submitted' && github.event.review.status != 'approved'
+        if: github.event.action == 'submitted' && github.event.review.state != 'approved'
         env: 
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title":"PR Review Submitted - ${{ github.event.review.status}} ", "color": 	16744192, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: ${{github.event.pull_request.title}}"  }]'
+          DISCORD_EMBEDS: '[{"title":"PR Review Submitted - ${{ github.event.review.state}} ", "color": 167441f92, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: ${{github.event.pull_request.title}}"  }]'
         with:
           args: ''
 
