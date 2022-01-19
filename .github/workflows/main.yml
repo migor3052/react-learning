@@ -18,7 +18,7 @@ jobs:
         if: github.event.action == 'review_requested'
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title":"PR Review Requested!", "color": 39423, "url":${{ toJSON(github.event.pull_request.html_url) }},"description": "${{ github.event.pull_request.user.login}} requested a review from ${{github.event.requested_reviewer.login}} for the PR: ${{github.event.pull_request.title}}"  }]'
+          DISCORD_EMBEDS: '[{"title":"PR Review Requested!", "color": 39423, "url":${{ github.event.pull_request.html_url }},"description": "${{ github.event.pull_request.user.login}} requested a review from ${{github.event.requested_reviewer.login}} for the PR: ${{github.event.pull_request.title}}"  }]'
         with:
           args: ''
       - name: Review submitted - Approved 
