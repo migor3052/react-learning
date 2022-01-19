@@ -26,9 +26,9 @@ jobs:
         if: github.event.action == 'submitted'
         env: 
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          DISCORD_EMBEDS: '[{"title":"PR Review Submitted!", "color": 16770560, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.login}}, ${{ github.event.review.user.login}} submitted a review for your PR:${{github.event.pull_request.title}}"  }]'
+          DISCORD_EMBEDS: '[{"title":"PR Review Submitted - ${{github.event.user.pull_request.state}} ", "color": ${{ (github.event.review.state == 'appoved' && '65280') || '	16744192' }}, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.user.pull_request.login}}, ${{ github.event.review.user.login}} submitted a review for your PR:${{github.event.pull_request.title}}"  }]'
         with:
           args: ''
       - name: Dump GitHub context
         id: github_context_step
-        run: echo '${{ github.event.review.state }}'
+        run: echo '${{ (github.event.review.state == 'commented' && 'comment") || "not comment" }}'
