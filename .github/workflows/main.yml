@@ -6,7 +6,6 @@ on:
     types: [review_requested]
   pull_request_review:
     types: [submitted]
-  
 
 jobs:
   build:
@@ -20,29 +19,28 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{"title":"PR Review Requested!", "color": 39423, "url":${{ toJSON(github.event.pull_request.html_url) }},"description": "${{ github.event.pull_request.user.login}} requested a review from ${{github.event.requested_reviewer.login}} for the PR: [${{github.event.pull_request.title}}]"  }]'
         with:
-          args: ''
-      - name: Review submitted - Approved 
+          args: ""
+      - name: Review submitted - Approved
         uses: Ilshidur/action-discord@master
         if: github.event.action == 'submitted' && github.event.review.state == 'approved'
-        env: 
+        env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{"title":"PR Review Submitted - Approved", "color": 65280, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: [${{github.event.pull_request.title}}]"  }]'
         with:
-          args: ''
+          args: ""
       - name: Review submitted - Commented
         uses: Ilshidur/action-discord@master
         if: github.event.action == 'submitted' && github.event.review.state == 'commented'
-        env: 
+        env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{"title":"PR Review Submitted - Commented", "color": 16776960, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: [${{github.event.pull_request.title}}]"  }]'
-        with:
-          args: ''
+        with: 
+          args: '{{ EVENT_PAYLOAD.requested_reviewer.login}} <@308929626187497472> '
       - name: Review submitted - Changes Requested
         uses: Ilshidur/action-discord@master
         if: github.event.action == 'submitted' && github.event.review.state == 'changes_requested'
-        env: 
+        env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
           DISCORD_EMBEDS: '[{"title":"PR Review Submitted - Changes Requested", "color": 16744192, "url":${{ toJSON(github.event.review.html_url) }},"description": "${{github.event.pull_request.user.login}}, ${{ github.event.review.user.login}} submitted a review for your PR: [${{github.event.pull_request.title}}]"  }]'
         with:
-          args: ''
-
+          args: ""
